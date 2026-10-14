@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#05070d" />
+  <title>Shesha — Till</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="grid-bg">
+  <main class="app">
+    <header class="topbar">
+      <div class="logo"><img src="icon.svg" alt="" /> <span id="shopName">Shesha</span></div>
+      <div class="status">
+        <span id="netPill" class="pill live">● Online</span>
+        <span id="demoPill" class="pill warn" hidden>Demo</span>
+      </div>
+    </header>
+
+    <!-- SELL -->
+    <section id="view-sell" class="view active">
+      <div class="searchrow">
+        <input id="search" type="search" placeholder="Search or say “2 bread and 1 milk”" autocomplete="off" />
+        <button id="micBtn" class="btn mic" title="Sell by voice" aria-label="Sell by voice">🎙️</button>
+      </div>
+      <div id="productGrid" class="products"></div>
+    </section>
+
+    <!-- STOCK -->
+    <section id="view-stock" class="view">
+      <div class="topbar">
+        <h2 class="section" style="margin:0">Stock</h2>
+        <button class="btn small primary" id="addProductBtn">+ Product</button>
+      </div>
+      <div id="stockValue" class="kpis"></div>
+      <div class="card" id="stockList"></div>
+    </section>
+
+    <!-- CREDIT BOOK -->
+    <section id="view-book" class="view">
+      <div class="topbar">
+        <h2 class="section" style="margin:0">Credit book</h2>
+        <button class="btn small primary" id="addCustomerBtn">+ Customer</button>
+      </div>
+      <div id="bookSummary" class="kpis"></div>
+      <div class="card" id="customerList"></div>
+    </section>
+
+    <!-- PULSE / INSIGHTS -->
+    <section id="view-pulse" class="view">
+      <div id="pulseKpis" class="kpis"></div>
+      <h2 class="section">Smart tips</h2>
+      <div id="tips"></div>
+      <h2 class="section">Last 14 days</h2>
+      <div class="card"><canvas id="chart" width="680" height="180"></canvas></div>
+      <h2 class="section">Best sellers (7 days)</h2>
+      <div class="card" id="bestSellers"></div>
+      <h2 class="section">Recent sales</h2>
+      <div class="card" id="recentSales"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-me" class="view">
+      <h2 class="section">Your shop</h2>
+      <div class="card">
+        <label for="setName">Shop name</label>
+        <input id="setName" placeholder="e.g. Mama Thandi's Spaza" />
+        <label for="setPhone">WhatsApp number (for receipts)</label>
+        <input id="setPhone" inputmode="tel" placeholder="e.g. 082 123 4567" />
+        <div style="margin-top:14px"><button class="btn primary block" id="saveShop">Save</button></div>
+      </div>
+      <h2 class="section">Backup — never lose your book</h2>
+      <div class="card stack">
+        <p class="muted" style="margin:0">Your data lives only on this phone. Make a backup and send it to yourself on WhatsApp or email.</p>
+        <div class="two">
+          <button class="btn" id="exportBtn">⬇️ Backup</button>
+          <button class="btn" id="importBtn">⬆️ Restore</button>
+        </div>
+        <input type="file" id="importFile" accept="application/json" hidden />
+      </div>
+      <h2 class="section">Spread the word</h2>
+      <div class="card stack">
+        <p class="muted" style="margin:0">Know another shop owner still using a paper book? Send them Shesha — it’s free.</p>
+        <button class="btn wa block" id="shareAppBtn">Share on WhatsApp</button>
+      </div>
+      <h2 class="section">Danger zone</h2>
+      <div class="card stack">
+        <button class="btn" id="freshBtn">🧹 Start fresh (clear demo data)</button>
+        <button class="btn" id="demoBtn">🎲 Load demo shop</button>
+      </div>
+      <p class="muted" style="text-align:center;margin-top:24px;font-size:13px">Shesha v1 · Made in Mzansi 🇿🇦 · <a href="index.html">About</a></p>
+    </section>
+  </main>
+
+  <div id="cartBar" class="cartbar">
+    <div class="card">
+      <div>
+        <div class="muted" id="cartCount">0 items</div>
+        <div class="total" id="cartTotal">R0.00</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn small" id="clearCart" aria-label="Clear cart">✕</button>
+        <button class="btn primary" id="checkoutBtn">Charge →</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-view="sell" class="active"><span>⚡</span>Sell</button>
+    <button data-view="stock"><span>📦</span>Stock</button>
+    <button data-view="book"><span>📒</span>Book</button>
+    <button data-view="pulse"><span>📈</span>Pulse</button>
+    <button data-view="me"><span>🏪</span>Shop</button>
+  </nav>
+
+  <!-- Checkout -->
+  <dialog id="checkoutDlg">
+    <h3>Checkout</h3>
+    <div id="checkoutItems"></div>
+    <div class="row"><b>Total</b><b class="total" id="checkoutTotal"></b></div>
+    <label>Payment</label>
+    <div class="seg" id="payMethod">
+      <button class="btn small on" data-m="cash">💵 Cash</button>
+      <button class="btn small" data-m="card">💳 Card/EFT</button>
+      <button class="btn small" data-m="credit">📒 Book</button>
+    </div>
+    <div id="cashBox">
+      <label for="tendered">Cash received</label>
+      <input id="tendered" type="number" inputmode="decimal" min="0" step="0.5" placeholder="0.00" />
+      <div class="three" style="margin-top:8px" id="quickCash"></div>
+      <div class="change" id="changeOut">Change: R0.00</div>
+    </div>
+    <div id="creditBox" hidden>
+      <label for="creditCustomer">Put on whose book?</label>
+      <select id="creditCustomer"></select>
+    </div>
+    <div class="two" style="margin-top:14px">
+      <button class="btn" id="cancelCheckout">Back</button>
+      <button class="btn primary" id="confirmSale">Done ✓</button>
+    </div>
+  </dialog>
+
+  <!-- After sale -->
+  <dialog id="doneDlg">
+    <h3 class="neon" style="font-size:28px">Sale done ⚡</h3>
+    <p id="doneText" class="muted"></p>
+    <label for="receiptPhone">Send WhatsApp receipt to (optional)</label>
+    <input id="receiptPhone" inputmode="tel" placeholder="Customer number" />
+    <div class="two" style="margin-top:14px">
+      <button class="btn" id="closeDone">Next customer</button>
+      <button class="btn wa" id="sendReceipt">Send receipt</button>
+    </div>
+  </dialog>
+
+  <!-- Product editor -->
+  <dialog id="productDlg">
+    <h3 id="productDlgTitle">Product</h3>
+    <div class="two">
+      <div><label for="pEmoji">Icon</label><input id="pEmoji" maxlength="4" placeholder="🍞" /></div>
+      <div><label for="pName">Name</label><input id="pName" placeholder="White bread" /></div>
+      <div><label for="pPrice">Sell price (R)</label><input id="pPrice" type="number" inputmode="decimal" step="0.01" min="0" /></div>
+      <div><label for="pCost">Cost price (R)</label><input id="pCost" type="number" inputmode="decimal" step="0.01" min="0" /></div>
+      <div><label for="pStock">In stock</label><input id="pStock" type="number" inputmode="numeric" step="1" /></div>
+      <div><label for="pLow">Warn me below</label><input id="pLow" type="number" inputmode="numeric" step="1" min="0" /></div>
+    </div>
+    <p class="muted" id="pMargin" style="font-size:13px"></p>
+    <div class="two" style="margin-top:10px">
+      <button class="btn danger" id="deleteProduct">Delete</button>
+      <button class="btn primary" id="saveProduct">Save</button>
+    </div>
+    <button class="btn block" style="margin-top:8px" id="cancelProduct">Cancel</button>
+  </dialog>
+
+  <!-- Customer editor / payment -->
+  <dialog id="customerDlg">
+    <h3 id="customerDlgTitle">Customer</h3>
+    <label for="cName">Name</label><input id="cName" placeholder="Sipho (Block C)" />
+    <label for="cPhone">Phone</label><input id="cPhone" inputmode="tel" placeholder="072 000 0000" />
+    <label for="cLimit">Credit limit (R)</label><input id="cLimit" type="number" inputmode="decimal" min="0" step="10" placeholder="200" />
+    <div id="cPayBox" hidden>
+      <label for="cPay">Record a payment (R)</label>
+      <input id="cPay" type="number" inputmode="decimal" min="0" step="0.5" placeholder="0.00" />
+    </div>
+    <div class="two" style="margin-top:14px">
+      <button class="btn" id="cancelCustomer">Cancel</button>
+      <button class="btn primary" id="saveCustomer">Save</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

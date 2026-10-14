@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#05070d" />
+  <title>Shesha ⚡ The free futuristic till for spaza shops &amp; kasi businesses</title>
+  <meta name="description" content="Offline till, stock tracker and credit book for South African spaza shops. Works during load-shedding, uses zero data, sell by voice, WhatsApp receipts. Free." />
+  <meta property="og:title" content="Shesha ⚡ Your spaza, upgraded to the future" />
+  <meta property="og:description" content="Free offline till + credit book for kasi businesses. Works during load-shedding. No data. No sign-up." />
+  <meta property="og:image" content="icon-512.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .compare { width: 100%; border-collapse: collapse; }
+    .compare td, .compare th { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    .compare th { color: var(--muted); font-weight: 600; }
+    .compare td:nth-child(3) { color: var(--lime); }
+    details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; font-size: 17px; }
+    details p { color: var(--muted); }
+    .flag { height: 4px; border-radius: 2px; background: linear-gradient(90deg, #007a4d 0 25%, #ffb81c 25% 45%, #de3831 45% 65%, #002395 65% 85%, #fff 85%); width: 120px; margin-top: 18px; }
+  </style>
+</head>
+<body class="grid-bg">
+  <div class="wrap">
+    <nav class="nav">
+      <div class="logo"><img src="icon.svg" alt="" /> Shesha</div>
+      <a class="btn small primary" href="app.html">Open the till →</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <span class="pill live">🇿🇦 Built for Mzansi · works during load-shedding</span>
+        <h1>Your spaza,<br /><span class="neon">upgraded to the future.</span></h1>
+        <p class="lead">Shesha is a lightning-fast till, stock tracker and credit book that runs on any cheap phone. <b>No data. No sign-up. No fees.</b> Open it and start selling in 10 seconds.</p>
+        <div class="cta">
+          <a class="btn primary" href="app.html">⚡ Start selling — it's free</a>
+          <button class="btn" id="installBtn">📲 Install on my phone</button>
+        </div>
+        <p class="muted" id="iosHint" hidden style="font-size:14px">On iPhone: tap <b>Share</b> → <b>Add to Home Screen</b>.</p>
+        <div class="flag"></div>
+      </div>
+      <div class="phone"><iframe src="app.html" title="Live Shesha demo" loading="lazy"></iframe></div>
+    </header>
+
+    <div class="stats">
+      <div class="card stat"><b class="neon">0 MB</b><span class="muted">data needed to run. Fully offline.</span></div>
+      <div class="card stat"><b class="neon" id="sizeStat">~25 KB</b><span class="muted">to download, less than one WhatsApp photo.</span></div>
+      <div class="card stat"><b class="neon">3 sec</b><span class="muted">to ring up a sale, change worked out for you.</span></div>
+      <div class="card stat"><b class="neon">R0</b><span class="muted">to start. No contracts, no card machine needed.</span></div>
+    </div>
+
+    <section>
+      <h2>Everything the paper book can't do.</h2>
+      <div class="features">
+        <div class="card feature"><div class="ico">🎙️</div><h3>Sell by voice</h3><p class="muted">Say <i>“two bread and a Coke”</i> and it's in the cart. Hands stay free for the queue.</p></div>
+        <div class="card feature"><div class="ico">📒</div><h3>A credit book that collects</h3><p class="muted">See who owes what at a glance, set limits, and send a polite WhatsApp reminder with one tap.</p></div>
+        <div class="card feature"><div class="ico">🧠</div><h3>Pulse: a business brain</h3><p class="muted">Tells you what to restock <i>before</i> it runs out, your rush hour, your best day, and products you're losing money on.</p></div>
+        <div class="card feature"><div class="ico">🔌</div><h3>Load-shedding proof</h3><p class="muted">Runs with no signal and no Wi-Fi. Dark screen saves battery. Your till never goes down.</p></div>
+        <div class="card feature"><div class="ico">🧾</div><h3>WhatsApp receipts</h3><p class="muted">Send a neat receipt straight to the customer's WhatsApp. It looks professional and costs nothing.</p></div>
+        <div class="card feature"><div class="ico">🔒</div><h3>Your data, your phone</h3><p class="muted">Nothing is uploaded anywhere. Back it up to yourself on WhatsApp whenever you want.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Paper book vs <span class="neon">Shesha</span></h2>
+      <div class="card" style="overflow-x:auto">
+        <table class="compare">
+          <tr><th></th><th>📓 Paper book</th><th>⚡ Shesha</th></tr>
+          <tr><td>Know today's profit</td><td>Guess</td><td>Live, to the cent</td></tr>
+          <tr><td>Who owes you money</td><td>Flip pages, argue</td><td>One screen + WhatsApp reminder</td></tr>
+          <tr><td>Running out of bread</td><td>When the shelf is empty</td><td>Warned 2 days before</td></tr>
+          <tr><td>Working out change</td><td>Mental maths in a queue</td><td>Instant</td></tr>
+          <tr><td>Rain, fire, lost book</td><td>Gone</td><td>Backed up</td></tr>
+          <tr><td>Cost</td><td>R25 a book</td><td>R0</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Simple pricing</h2>
+      <div class="pricing">
+        <div class="card price hot">
+          <span class="pill live">Available now</span>
+          <h3>Free</h3><b>R0</b><span class="muted">/forever</span>
+          <ul><li>Unlimited sales &amp; products</li><li>Credit book + WhatsApp reminders</li><li>Pulse insights</li><li>Voice selling</li><li>Backups</li></ul>
+          <a class="btn primary block" href="app.html">Start now</a>
+        </div>
+        <div class="card price">
+          <span class="pill warn">Coming soon</span>
+          <h3>Pro</h3><b>R49</b><span class="muted">/month</span>
+          <ul><li>Automatic cloud backup</li><li>Two or more phones, one shop</li><li>Wholesaler price compare</li><li>Monthly profit report for the bank or SEFA</li></ul>
+          <a class="btn block" id="proWait" href="#">Join the waitlist</a>
+        </div>
+        <div class="card price">
+          <span class="pill">For brands</span>
+          <h3>Partners</h3><b>Talk</b><span class="muted"> to us</span>
+          <ul><li>Wholesalers &amp; FMCG brands</li><li>Reach thousands of kasi shops</li><li>Anonymous, opt-in demand trends</li><li>Restock deals inside the app</li></ul>
+          <a class="btn block" id="partnerBtn" href="#">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <div class="card">
+        <details><summary>Do I need data or Wi-Fi?</summary><p>Only once to open the page. After that Shesha works completely offline, even in airplane mode. Sending a WhatsApp receipt or reminder uses WhatsApp as normal.</p></details>
+        <details><summary>Does it work on my cheap phone?</summary><p>Yes. Any Android phone with Chrome from the last 6 years, and iPhones too. It's smaller than a single photo.</p></details>
+        <details><summary>What if I lose my phone?</summary><p>Use <b>Shop → Backup</b> to send your data file to yourself on WhatsApp or email. On a new phone, tap <b>Restore</b>.</p></details>
+        <details><summary>Who can see my sales?</summary><p>Only you. Nothing leaves your phone unless you send it yourself.</p></details>
+        <details><summary>Can I try it first?</summary><p>The app opens with a demo shop already full of sales so you can play with it. When you're ready, tap <b>Shop → Start fresh</b>.</p></details>
+      </div>
+    </section>
+
+    <section style="text-align:center">
+      <h2>Stop guessing. <span class="neon">Start knowing.</span></h2>
+      <a class="btn primary" href="app.html" style="font-size:18px;padding:16px 28px">⚡ Open Shesha free</a>
+    </section>
+
+    <footer>Shesha · Made in Mzansi for the kasi economy 🇿🇦 · Sharp sharp.</footer>
+  </div>
+
+  <script>
+    let deferred;
+    addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferred = e; });
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    document.getElementById("installBtn").addEventListener("click", async () => {
+      if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; }
+      else if (isIOS) document.getElementById("iosHint").hidden = false;
+      else location.href = "app.html";
+    });
+    // Replace with your own WhatsApp business number once you have one.
+    const CONTACT = "";
+    const wa = (t) => `https://wa.me/${CONTACT}?text=${encodeURIComponent(t)}`;
+    document.getElementById("proWait").href = wa("Hi! Please add me to the Shesha Pro waitlist. My shop is: ");
+    document.getElementById("partnerBtn").href = wa("Hi! I'm interested in partnering with Shesha. Company: ");
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(() => {});
+  </script>
+</body>
+</html>
